@@ -1,5 +1,4 @@
 # Python dependencies for Vercel Serverless Functions
-# Vercel reads this from the project root.
 fastapi>=0.141.1
 httpx>=0.28.1
 pydantic>=2.13.4

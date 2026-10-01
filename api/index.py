@@ -1,12 +1,6 @@
 """
 Vercel Serverless Function – catch-all handler for the FastAPI backend.
-
-Vercel invokes this module for every ``/api/*`` request.  We add
-``src/backend`` to ``sys.path`` so all the existing ``app.*`` and ``config``
-imports work unchanged.
-
-Vercel's @vercel/python runtime natively supports ASGI applications.
-It detects the ``app`` variable and serves it directly – no Mangum needed.
+Works when Vercel project Root Directory is set to repo root (./).
 """
 
 import os
@@ -14,12 +8,12 @@ import sys
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
-# 1. Ensure the backend package root is on ``sys.path``
+# 1. Ensure the backend package root is on sys.path
 # ---------------------------------------------------------------------------
 _current = Path(__file__).resolve().parent
 _candidates = [
-    _current.parent / "src" / "backend",
     _current.parent / "FilePulse" / "src" / "backend",
+    _current.parent / "src" / "backend",
 ]
 for _candidate in _candidates:
     if (_candidate / "main.py").exists():
@@ -29,14 +23,11 @@ for _candidate in _candidates:
         break
 
 # ---------------------------------------------------------------------------
-# 2. Set VERCEL env-flag (Vercel also sets it, but belt-and-suspenders)
+# 2. Set VERCEL env-flag
 # ---------------------------------------------------------------------------
 os.environ.setdefault("VERCEL", "1")
 
 # ---------------------------------------------------------------------------
-# 3. Import the FastAPI ``app`` – Vercel's ASGI adapter picks this up
+# 3. Import the FastAPI app – Vercel's ASGI adapter picks this up
 # ---------------------------------------------------------------------------
-from main import app  # noqa: E402  – path must be set first
-
-# Vercel's @vercel/python runtime detects the ``app`` ASGI application
-# and handles it automatically.  No additional adapter is needed.
+from main import app  # noqa: E402
