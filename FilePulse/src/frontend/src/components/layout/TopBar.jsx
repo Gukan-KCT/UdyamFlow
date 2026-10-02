@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { User, ShieldCheck, RefreshCw, AlertCircle, Check } from "lucide-react";
+import { User, ShieldCheck, RefreshCw, Check } from "lucide-react";
 import { login, getActiveUser } from "../../api/client";
 
 const DEMO_PERSONAS = [
@@ -74,15 +74,7 @@ export function TopBar() {
     DEMO_PERSONAS.find((p) => p.email === currentUser?.email) || DEMO_PERSONAS[0];
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-      {/* Disclaimer Banner */}
-      <div className="flex items-center gap-2 text-[11px] text-amber-800 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200/80">
-        <AlertCircle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-        <span className="font-semibold">
-          SAMPLE / ILLUSTRATIVE — UdyamFlow Prototype for Smart India Hackathon (SIH 2026)
-        </span>
-      </div>
-
+    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-8 py-3 flex flex-col sm:flex-row items-center justify-end gap-3 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
       {/* Role / Persona Switcher */}
       <div className="flex items-center gap-3">
         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
